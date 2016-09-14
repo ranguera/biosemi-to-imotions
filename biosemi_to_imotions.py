@@ -11,10 +11,9 @@ imotions_ip = "127.0.0.1"
 imotions_port = 8889
 
 import imotions
-import biosemi
+from biosemi import get_biosemi_samples
 
-samples = get_biosemi_samples(biosemi_ip,biosemi_port,biosemi_num_channels,
-	biosemi_packet_size,biosemi_buffer_size)
+samples = get_biosemi_samples(biosemi_ip,biosemi_port,biosemi_num_channels,biosemi_packet_size,biosemi_buffer_size)
 
 for x in xrange(len(samples)):
 	UDPToImotions(imotions_ip, imotions_port, samples[x])

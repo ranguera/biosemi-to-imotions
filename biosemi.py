@@ -31,12 +31,12 @@
 # roger.anguera@ucsf.edu
  
 import socket
-  
 
- def get_biosemi_samples(ip, port, num_channels, packet_size, buffer_size)
+
+def get_biosemi_samples(ip, port, num_channels, packet_size, buffer_size):
 	# Open socket
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	s.connect(ip,port)
+	s.connect((ip,port))
 	     
 	# Read the next packet from the network
 	data = s.recv(buffer_size)

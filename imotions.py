@@ -15,10 +15,11 @@ def UDPToImotions(ip, port, samples):
     #     time.sleep(.5)
     #     print("Sending Data to Port " + str(UDP_PORT))
 
-    def ArrayToImotionsXML(samples):
-        s = "E;1;Biosemi;1;0.0;;;EEG;"
-        for x in range(0,len(samples-1)):
-            s += str(samples[x])+";"
-        s += str(samples[len(samples-1)])
-        s += "\r\n"
-        return s
+def ArrayToImotionsXML(samples):
+    s = "E;1;Biosemi;1;0.0;;;EEG;"
+    for x in range(0,len(samples-1)):
+        s += str(samples[x])+";"
+        
+    s += str(samples[len(samples-1)])
+    s += "\r\n"
+    return s
