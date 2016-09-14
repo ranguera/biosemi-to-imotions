@@ -56,3 +56,20 @@ def get_biosemi_samples(ip, port, num_channels, packet_size, buffer_size):
 	s.close()
 
 	return samples
+
+
+# from pyactivetwo
+ # Extract 16 samples from the packet (ActiView sends them in 16-sample chunks)
+            # for m in range(self.tcpsamples):
+
+            #     # extract samples for each channel
+            #     for ch in range(self.nchannels):
+            #         offset = m * 3 * self.nchannels + (ch * 3)
+
+            #         # The 3 bytes of each sample arrive in reverse order
+            #         sample = (ord(data[offset+2]) << 16)
+            #         sample += (ord(data[offset+1]) << 8)
+            #         sample += ord(data[offset])
+
+            #         # Store sample to signal buffer
+            #         signal_buffer[ch, m] = sample
