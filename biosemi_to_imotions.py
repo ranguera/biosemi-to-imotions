@@ -10,10 +10,14 @@ biosemi_packet_size = 16 # see actiview. depdends on sampling rate
 imotions_ip = "127.0.0.1"
 imotions_port = 8889
 
-import imotions
-from biosemi import get_biosemi_samples
+from imotions import Imotions
+from biosemi import Biosemi
 
-samples = get_biosemi_samples(biosemi_ip,biosemi_port,biosemi_num_channels,biosemi_packet_size,biosemi_buffer_size)
+imotions = Imotions(imotions_ip, imotions_port)
+biosemi = Biosemi(biosemi_ip,biosemi_port,biosemi_num_channels,biosemi_packet_size)
 
-for x in xrange(len(samples)):
-	UDPToImotions(imotions_ip, imotions_port, samples[x])
+while True:
+	samples = biosemi.read()
+
+	for x in xrange(len(samples)):
+		imotions.UDPToImotions(samples[x])
