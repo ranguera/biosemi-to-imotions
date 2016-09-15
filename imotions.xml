@@ -1,0 +1,12 @@
+ <EventSource Id="Biosemi" Version="1" Name="EventSourceName">
+	<Sample Id="EEG" Name="SampleName">
+		<Field Id="GraphLabel1" Range="Variable"></Field>
+		<Field Id="GraphLabel2" Range="Variable"></Field>
+		<Field Id="GraphLabel3" Range="Variable"></Field>
+		<Field Id="GraphLabel4" Range="Variable"></Field>
+		<Field Id="GraphLabel5" Range="Variable"></Field>
+		<Field Id="GraphLabel6" Range="Variable"></Field>
+		<Field Id="GraphLabel7" Range="Variable"></Field>
+		<Field Id="GraphLabel8" Range="Variable"></Field>
+	</Sample>
+ </EventSource>

@@ -30,32 +30,32 @@ class Biosemi():
 	def __init__(self, _ip, _port, _nchannels, _tcpsamples):
 
 		# store parameters
-		ip = _ip
-		port = _port
-		nchannels = _nchannels
-		tcpsamples = _tcpsamples
-		buffer_size = nchannels * tcpsamples * 3
+		self.ip = _ip
+		self.port = _port
+		self.nchannels = _nchannels
+		self.tcpsamples = _tcpsamples
+		self.buffer_size = self.nchannels * self.tcpsamples * 3
 
 		# open connection
-		s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-		s.connect((ip, port))
+		self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		self.s.connect((self.ip, self.port))
 
-	def read():
+	def read(self):
 
 		# Create a 16-sample signal_buffer
-		signal_buffer = np.zeros((nchannels, tcpsamples))
+		signal_buffer = np.zeros((self.nchannels, self.tcpsamples))
 
 		# Read the next packet from the network
 		# sometimes there is an error and packet is smaller than needed, read until get a good one
 		data = []
-		while len(data) != buffer_size:
-			data = s.recv(buffer_size)
+		while len(data) != self.buffer_size:
+			data = self.s.recv(self.buffer_size)
 
 		# Extract 16 samples from the packet (ActiView sends them in 16-sample chunks)
-		for m in range(tcpsamples):
+		for m in range(self.tcpsamples):
 			# extract samples for each channel
-			for ch in range(nchannels):
-				offset = m * 3 * nchannels + (ch * 3)
+			for ch in range(self.nchannels):
+				offset = m * 3 * self.nchannels + (ch * 3)
 
 				# The 3 bytes of each sample arrive in reverse order
 				sample = (ord(data[offset+2]) << 16)
@@ -66,9 +66,9 @@ class Biosemi():
 				signal_buffer[ch, m] = sample
 
 		# transpose matrix so that rows are samples
-		#signal_buffer = np.transpose(signal_buffer)
+		signal_buffer = np.transpose(signal_buffer)
 
 		return signal_buffer
 
-	def disconnect():
-		s.close()
+	def disconnect(self):
+		self.s.close()
